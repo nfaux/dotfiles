@@ -1,0 +1,81 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+format = '''
+$cmd_duration
+$os$battery $username$hostname
+$directory$all$package
+$character'''
+
+continuation_prompt = '[➜➜](bold bg:blue fg:red)'
+
+scan_timeout = 50
+command_timeout = 10000
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+error_symbol = '[✗](bold red)'
+
+[os.symbols]
+Macos = ' '
+
+[cmd_duration]
+disabled = false
+min_time = 1
+show_milliseconds = true
+format = 'took [$duration]($style) '
+
+[username]
+show_always = true
+format = '[$user]($style) '
+
+[hostname]
+ssh_only = false
+format = 'on [$ssh_symbol$hostname]($style) in'
+
+[directory]
+format = '[$read_only]($read_only_style)[$path/]($style) '
+
+[package]
+disabled = false
+format = 'via [🎁 $version](208 bold) '
+
+[os]
+disabled = false
+format = "$symbol"
+
+[python]
+symbol = '🐍 '
+pyenv_version_name = true
+
+[rlang]
+symbol = '📐 '
+format = 'with [📐 $version](blue bold) '
+detect_extensions = ['R', 'Rd', 'Rmd', 'Rproj', 'Rsx']
+detect_files = ['.Rprofile']
+detect_folders = ['.Rproj.user']
+
+[rust]
+symbol = '🦀 '
+format = 'via [⚙️ $version](red bold)'
+version_format = 'v${raw}'
+
+[perl]
+format = 'via [🦪 $version]($style) '
+
+[battery]
+disabled = false
+full_symbol = '🔋 '
+charging_symbol = '⚡️'
+discharging_symbol = '💦 '
+empty_symbol = '💀 '
+format = '$symbol$percentage'
+
+[[battery.display]]
+threshold = 100
+style = 'Bold red'
+
